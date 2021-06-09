@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Bad Request{% endblock %}
+
+{% block description %}You sent an invalid request{% endblock %}
+
+{% block content %}
+<div class="container text-light">
+	<div class="display-4 pt-5 pb-2">400 - Bad request</div>
+	<p class="lead">
+		Error accessing:
+		<code class="d-block text-left">
+			{{ request.full_path }}
+		</code>
+	</p>
+	<h3>Full Error:</h3>
+	<p>{{ description }}</p>
+</div>
+{% endblock %}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<title>{% block title %}Page has no title.{% endblock %}</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=5" name="viewport"/>
+		<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+		<meta content="#141516" name="theme-color"/>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<meta property="og:title" content="{% block ogtitle %}{% endblock %}"/>
+		<meta property="og:description" content="{% block ogdescription %}{% endblock %}"/>
+		<meta name="description" content="{% block description %}Lancometer 3.0 webpage{% endblock %}"/>
+
+		<!-- Some pre-connects to speed up page loading -->
+		<link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link rel="dns-prefetch" href="https://mt1.google.com" />
+
+		<!-- Manifest for PWAs -->
+		<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}" />
+
+		{% if config.ENV == 'development' %}
+			<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}"/>
+		{% else %}
+			<link rel="stylesheet"
+				  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+				  integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
+				  crossorigin="anonymous"/>
+		{% endif %}
+
+		{% block pagehead %}
+			<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css') }}" />
+		{% endblock pagehead %}
+
+	</head>
+	<body>
+
+		<!--
+			Lancometer 3.0
+		-->
+
+		<div id="csrf_token" data-value="{{ csrf_token() }}"></div>
+
+		<main>
+
+			{% include "components/navbar.html" %}
+			{% block content %}{% endblock %}
+
+		</main>
+
+		<footer class="footer">
+			<p class="text-light ml-4">© 2021 Lancometer 3.0, All rights reserved.</p>
+		</footer>
+
+		<!-- Fonts -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css"
+			  integrity="sha512-jQqzj2vHVxA/yCojT8pVZjKGOe9UmoYvnOuM/2sQ110vxiajBU+4WkyRs1ODMmd4AfntwUEV4J+VfM6DkfjLRg=="
+			  crossorigin="anonymous"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css"
+			  integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA=="
+			  crossorigin="anonymous"/>
+
+		{% if config.ENV == 'development' %}
+			<script src="{{ url_for('static', filename='jquery/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
+		{% else %}
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+					integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+					crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"
+					integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg=="
+					crossorigin="anonymous"></script>
+		{% endif %}
+
+		<script src="{{ url_for('static', filename='js/lancometer.js') }}"></script>
+
+		{% block loadjslibraries %}
+		<!-- Leaflet -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"
+				integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA=="
+				crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css"
+			  integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA=="
+			  crossorigin="anonymous"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.73.0/L.Control.Locate.min.js" integrity="sha512-taGzWgtN8FsSonl7SSrfPQBvTm/omZEf9p0s64IomW39xQZx8bSmP+aUyzeqig61ojVlMUwW5Moyo87HNQxliw==" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.73.0/L.Control.Locate.min.css" integrity="sha512-61KpOy3DnpOq3pZlp54eyUdvq9ub53e2ETbksuRlQCMNiAkqyB2Iz8a6ggg61e9zlvPImPz+7A0tgvNGaoVLZg==" crossorigin="anonymous" />
+
+		<!-- Chart.js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"
+				integrity="sha512-VMsZqo0ar06BMtg0tPsdgRADvl0kDHpTbugCBBrL55KmucH6hP9zWdLIWY//OTfMnzz6xWQRxQqsUFefwHuHyg=="
+				crossorigin="anonymous"></script>
+
+		<!-- Sortable -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js" integrity="sha512-5x7t0fTAVo9dpfbp3WtE2N6bfipUwk7siViWncdDoSz2KwOqVC1N9fDxEOzk0vTThOua/mglfF8NO7uVDLRC8Q==" crossorigin="anonymous"></script>
+		{% endblock %}
+		{% block pageend %}{% endblock %}
+
+	</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{% if title %}{{ title }} | {% endif %}Lancometer 3{% endblock title %}
+
+{% block pagehead %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uppy/1.27.0/uppy.min.js" integrity="sha512-vlsLx+AdIgUfptm7WkzpBk8TZWJYVCjNq8bxHeUEyIqKyocRww0PK1gvyMwTsg8OvlnpjA4BlUeWyFlDW8U5Og==" crossorigin="anonymous"></script>
+{% endblock pagehead %}
+
+{% block content %}
+<div class="container-fluid p-5">
+	<div class="container">
+		<h1 class="display-3">Upload File</h1>
+		{% include "components/alert.html" %}
+		<hr />
+		<div id="drag-drop-area">
+			<form action="" enctype="multipart/form-data" method="POST">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<h5>The uploader was not loaded — slow connection, unsupported browser, weird JS error on a
+					page - falling back to standard file upload</h5>
+				<input type="file" name="file" multiple>
+				<button type="submit">Upload</button>
+			</form>
+		</div>
+		<hr />
+	</div>
+</div>
+{% endblock content %}
+
+{% block pageend %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uppy/1.27.0/uppy.min.css" integrity="sha512-zgilVU1Oj8eiTgOKOiw5tQmV/+Fb8RdjiMzuUBjDntL/d4IPNpz3XLMdwNqdKB2TVO6J6B7S/Yn0D8u+DscKJg==" crossorigin="anonymous" />
+<script src="{{ url_for('static', filename='js/uploads.js') }}"></script>
+{% endblock %}

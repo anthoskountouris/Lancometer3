@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Your Account{% endblock title %}
+{% block description %}Manage your account settings, change email address and password.{% endblock %}
+{% block ogdescription %}Manage your account settings, change email address and password.{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-5">
+	<div class="container">
+		<h1 class="display-3">Account Settings</h1>
+		{% include "components/alert.html" %}
+		<hr/>
+		<form class="p-5 shadow">
+			<div class="input-group mb-3 row">
+				<label for="static_name" class="col-sm-2 col-form-label">Name</label>
+				<div class="col-sm-10">
+					<input type="text" readonly class="form-control" id="static_name" value="{{ current_user.name }}">
+				</div>
+			</div>
+			<div class="input-group mb-3 row">
+				<label for="static_created" class="col-sm-2 col-form-label">Time Created</label>
+				<div class="col-sm-10">
+					<input type="text" readonly class="form-control" id="static_created" value="{{ current_user.time_created }}">
+				</div>
+			</div>
+			<div class="input-group mb-3 row">
+				<label for="static_email" class="col-sm-2 col-form-label">Your Email</label>
+				<div class="col-sm-10">
+					<input type="text" readonly class="form-control" id="static_email" value="{{ current_user.email }}">
+				</div>
+			</div>
+			<!--<div class="input-group mb-3 row">
+				<label for="static_phone" class="col-sm-2 col-form-label">Your Phone</label>
+				<div class="col-sm-10">
+					<input type="text" readonly class="form-control" id="static_phone" value="{{ current_user.phone }}">
+				</div>
+			</div>-->
+		</form>
+
+		<hr/>
+		<div class="float-right">
+			<a href="{{ url_for('user_bp.email') }}" class="btn btn-outline-primary ml-1"><i class="bi bi-envelope">@</i> Change Email</a>
+			<a href="{{ url_for('user_bp.password') }}" class="btn btn-outline-primary ml-1"><i class="fas fa-key"></i> Change Password</a>
+			<a href="{{ url_for('user_bp.clear_cache') }}" class="btn btn-outline-warning ml-1"><i class="fas fa-table"></i> Clear Cache</a>
+			<a href="{{ url_for('user_bp.download') }}" class="btn btn-outline-light ml-1"><i class="fas fa-download"></i> Download My Data</a>
+			<a href="{{ url_for('user_bp.delete') }}" class="btn btn-outline-danger ml-1"><i class="fas fa-trash"></i> Delete Account</a>
+		</div>
+	</div>
+</div>
+{% endblock content %}

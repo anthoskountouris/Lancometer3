@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Delete {{ mode }}{% endblock title %}
+
+{% block pagehead %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css') }}" />
+{% endblock pagehead %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid bg-dark text-light">
+	<div class="container">
+		<h1 class="display-3 text-light">Delete {{ mode }}?</h1>
+		{% include "components/alert.html" %}
+	</div>
+</div>
+
+<div class="container text-light">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/">Home</a></li>
+			<li class="breadcrumb-item"><a href="{{ url_for('lecturer_bp.dashboard') }}">Your Dashboard</a></li>
+			<li class="breadcrumb-item"><a href="{% if mode=="Quiz" %} {{ url_for('lecturer_bp.manage_quiz') }} {% else %} {{ url_for('lecturer_bp.manage_stream') }} {% endif %}">
+					Manage
+					{% if mode == "Quiz" %}
+					Quizzes
+					{% else %}
+					Streams
+					{% endif %}
+				</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Delete {{ mode }}</li>
+		</ol>
+	</nav>
+
+	<p class="lead">
+		Are you sure you wish to delete this {{ mode }}?<br />
+		{% if mode == "Quiz" %}
+		Any Quiz Stream's associated with this quiz (including currently running streams) will also be deleted.
+		{% endif %}
+	</p>
+
+	<form action="?" method="post">
+		<div class="form-group">
+			{% for item in delete_form %}
+			{% for error in item.errors %}
+			<br /><small class="text-muted text-error">[{{ error }}]</small>
+			{% endfor %}
+			{{ item(class="btn btn-danger") }}
+			{% endfor %}
+			<a href="{{ url_for('lecturer_bp.manage_quiz') }}" class="btn btn-secondary">Cancel</a>
+		</div>
+	</form>
+</div>
+
+{% endblock content %}

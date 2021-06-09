@@ -1,0 +1,2 @@
+# If you have found a security issue with Lancometer, please contact the development team at:
+Contact: lan@cometer.com

@@ -1,0 +1,19 @@
+{
+	"short_name":"Lancometer",
+	"name":"Lancometer 3.0",
+	"description":"Educational quizzes for you",
+	"categories":["utilities", "productivity"],
+	"icons":[
+		{
+			"src": "/static/images/logo.png",
+			"type": "image/png",
+			"sizes": "256x256"
+		}
+	],
+	"start_url":"/entry",
+	"scope":"/",
+	"theme_color":"#141516",
+	"background_color":"#141516",
+	"display":"standalone",
+	"orientation":"portrait"
+}

@@ -1,0 +1,28 @@
+body {
+	background-color: #141516;
+	align-items: center;
+	justify-content: center;
+
+}
+
+
+.jumbotron {
+	background-color: #141516;
+}
+
+
+.btn {
+	background-color: #4C58E0; 
+	border: none;
+}
+
+
+.card {
+	border: none;
+	background-color: #222424;
+
+}
+
+.card-body {
+	background-color: #222424;
+}

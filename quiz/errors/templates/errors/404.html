@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Not Found{% endblock %}
+
+{% block description %}This page was not found.{% endblock %}
+
+{% block content %}
+<div class="container text-light">
+	<div class="display-4 pt-5 pb-2">404 - Not Found</div>
+	<p class="lead">
+		Could not find the URL you tried to visit:
+		<code class="d-block text-left">
+			{{ request.full_path }}
+		</code>
+	</p>
+	<h3>Full Error:</h3>
+	<p>{{ description }}</p>
+</div>
+{% endblock %}

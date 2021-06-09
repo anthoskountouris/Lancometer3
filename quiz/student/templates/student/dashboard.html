@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Your Dashboard{% endblock title %}
+
+{% block pagehead %}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+{% endblock pagehead %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-3 text-light mb-4">Student Dashboard</h1>
+		{% include "components/alert.html" %}
+		<p class="lead">Welcome back, {{ current_user.name }}</p>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3 col-sm-6"></div>
+		<div class="col-md-3 col-sm-6">
+			<div class="card">
+				<div class="card-body text-center">
+					<h4 class="card-title">Account Settings</h4>
+					<p class="card-text">Update your details</p>
+					<a href="{{ url_for('user_bp.account') }}" class="btn btn-secondary">
+						<i class="fas fa-user"></i> My Account
+					</a>
+					<a href="{{ url_for('user_bp.logout') }}" class="btn btn-danger">
+						<i class="fas fa-sign-out-alt"></i> Logout
+					</a>
+				</div>
+			</div>
+		</div>
+
+	<div class="col-md-3 col-sm-6">
+		<div class="card">
+			<div class="card-body text-center">
+				<h4 class="card-title">Help</h4>
+				<p class="card-text">Something you're not sure about?</p>
+				<a href="{{ url_for('info_bp.student_support') }}" class="btn btn-secondary">
+					<i class="fas fa-question-circle"></i> View Support
+				</a>
+			</div>
+		</div>
+	</div>
+
+	</div>
+</div>
+
+<div class="container-fluid mt-3 text-center">
+	<h1 class="display-5">Unfinished Quizzes</h1>
+	<div class="row">
+
+		<div class="col-md-3 col-sm-6">
+			<div class="card">
+				<div class="card-body text-center">
+					<h4 class="card-title">Robotics Quiz (CM2502)</h4>
+					<p class="card-text">Week 5 lecture 7 robotics quiz for remote learners.</p>
+					<a href="?f=create-stream.php" class="btn btn-success"><i class="fas fa-play"></i> Continue</a>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item"><strong class="text-info"><i class="fas fa-calendar"></i> Ends in 5 days</strong></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-6">
+			<div class="card">
+				<div class="card-body text-center">
+					<h4 class="card-title">Informatics Quiz (CM203)</h4>
+					<p class="card-text">Week 4 lecture 7 informatics quiz for remote learners.</p>
+					<a href="?f=create-stream.php" class="btn btn-success"><i class="fas fa-play"></i> Continue</a>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item"><strong class="text-info"><i class="fas fa-calendar"></i> Ends in 3 days</strong></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-6">
+			<div class="card">
+				<div class="card-body text-center">
+					<h4 class="card-title">Informatics Quiz (CM203)</h4>
+					<p class="card-text">Week 4 lecture 7 informatics quiz for remote learners.</p>
+					<a href="?f=create-stream.php" class="btn btn-success"><i class="fas fa-play"></i> Continue</a>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item"><strong class="text-info"><i class="fas fa-calendar"></i> Ends in 3 days</strong></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-6">
+			<div class="card">
+				<div class="card-body text-center">
+					<h4 class="card-title">Informatics Quiz (CM203)</h4>
+					<p class="card-text">Week 4 lecture 7 informatics quiz for remote learners.</p>
+					<a href="?f=create-stream.php" class="btn btn-success"><i class="fas fa-play"></i> Continue</a>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item"><strong class="text-info"><i class="fas fa-calendar"></i> Ends in 3 days</strong></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid mt-3 text-center">
+		<h1 class="display-5">Finished Quizzes</h1>
+		<div class="row">
+
+			<div class="col-md-3 col-sm-6">
+				<div class="card">
+					<div class="card-body text-center">
+						<h4 class="card-title">Robotics Quiz (CM2502)</h4>
+						<p class="card-text">Week 8 lecture 7 robotics quiz for remote learners.</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><strong class="text-success">Result: 80/100</strong></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="card">
+					<div class="card-body text-center">
+						<h4 class="card-title">Robotics Quiz (CM2502)</h4>
+						<p class="card-text">Week 6 lecture 7 robotics quiz for remote learners.</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><strong class="text-success">Result: 80/100</strong></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="card">
+					<div class="card-body text-center">
+						<h4 class="card-title">Robotics Quiz (CM2502)</h4>
+						<p class="card-text">Week 5 lecture 7 robotics quiz for remote learners.</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><strong class="text-success">Result: 80/100</strong></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="card">
+					<div class="card-body text-center">
+						<h4 class="card-title">Robotics Quiz (CM2502)</h4>
+						<p class="card-text">Week 5 lecture 7 robotics quiz for remote learners.</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><strong class="text-success">Result: 80/100</strong></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+{% endblock content %}

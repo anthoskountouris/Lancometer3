@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Your Dashboard{% endblock %}
+{% block description %}Lancometer 3 admin dashboard, manage all data entered into the system{% endblock %}
+{% block ogdescription %}Lancometer 3 admin dashboard, manage all data entered into the system{% endblock %}
+
+{% block pagehead %}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin.css') }}"/>
+{% endblock pagehead %}
+
+{% block content %}
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-3 text-light mb-4">Admin Dashboard</h1>
+			{% include "components/alert.html" %}
+			<h2 class="lead text-light">Welcome back, {{ current_user.name }}</h2>
+		</div>
+	</div>
+
+
+	 <div class="container">
+		<div class="row">
+			<div class="col-md-6 col-sm-6">
+				<div class="card">
+					<div class="card-body text-center">
+						<h3 class="card-title text-light mb-5">Manage Data</h3>
+						<div class="btn-group" role="group" aria-label="System management quick options">
+							<a href="{{ url_for('admin_bp.manage_quiz') }}" class="btn text-light mb-3">
+								<i class="fas fa-table"></i> Manage Quizzes
+							</a>
+							<a href="{{ url_for('admin_bp.manage_stream') }}" class="btn text-light mb-3">
+								<i class="fas fa-cogs"></i> Manage Streams
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6">
+				<div class="card">
+					<div class="card-body text-center">
+						<h3 class="card-title text-light mb-5">System Maintenance</h3>
+						<div class="btn-group" role="group" aria-label="System maintenance">
+							<a href="/admin/" class="btn text-light mb-3">
+								<i class="fas fa-database text-light"></i> Manage Database
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

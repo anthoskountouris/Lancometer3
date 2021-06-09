@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}Your Dashboard{% endblock title %}
+
+{% block pagehead %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+{% endblock pagehead %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-3 text-light mb-4">Lecturer Dashboard</h1>
+		{% include "components/alert.html" %}
+		<h2 class="lead">Welcome back, {{ current_user.name }}</h2>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row mb-4">
+		<div class="col-md-6">
+			<div class="card h-100 mb-2">
+				<div class="card-body text-center">
+					<h4 class="card-title">Create</h4>
+					<p class="card-text">Create a new quiz</p>
+					<a id="new" href="{{ url_for('lecturer_bp.create_quiz') }}" class="btn btn-success">
+						<i class="fas fa-star"></i> New Quiz
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-body text-center">
+					<h4 class="card-title">Manage</h4>
+					<p class="card-text">Control content you have entered into the system</p>
+					<div id="manage" class="btn-group-vertical">
+						<a href="{{ url_for('lecturer_bp.manage_quiz') }}" class="btn btn-dark">
+							<i class="fas fa-table"></i> Manage Quizzes
+						</a>
+						<p></p>
+						<a href="{{ url_for('lecturer_bp.manage_stream') }}" class="btn btn-dark">
+							<i class="fas fa-cogs"></i> Manage Streams
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="row mb-5">
+			<div class="col-md-3 col-sm-6">
+				<div class="card">
+					<div class="card-body text-center">
+						<h4 class="card-title">Account Settings</h4>
+						<p class="card-text">Update your details</p>
+						<a href="{{ url_for('user_bp.account') }}" class="btn btn-secondary">
+							<i class="fas fa-user"></i> My Account
+						</a>
+						<a href="{{ url_for('user_bp.logout') }}" class="btn btn-danger">
+							<i class="fas fa-sign-out-alt"></i> Logout
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="card">
+					<div class="card-body text-center">
+						<h4 class="card-title">Help</h4>
+						<p class="card-text">Something you're not sure about?</p>
+						<a href="{{ url_for('info_bp.lecturer_support') }}" class="btn btn-secondary">
+							<i class="fas fa-question-circle"></i> View Support
+						</a>
+					</div>
+				</div>
+			</div>
+		</div> -->
+</div>
+
+
+<div class="container text-center mb-4">
+	<h1 class="display-5 mb-4">Recent Quizzes</h1>
+	{% if recent_quizzes|length == 0 %}
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<h1 class="text-light">No recent quizzes found</h1>
+		</div>
+	</div>
+	{% else %}
+	{% for quiz_row in recent_quizzes | batch(3) %}
+	<div class="row">
+		{% for quiz in quiz_row %}
+		<div class="col-md-4 col-sm-6">
+			<div class="card mb-4">
+				<div class="card-body text-center">
+					<h4 class="card-title">{{ quiz['name'] }}</h4>
+					<p class="card-text text-light">{{ quiz['description'] }}</p>
+					<!-- <a href="{{ url_for('lecturer_bp.manage_stream') }}" class="btn btn-primary"><i class="fas fa-plus"></i> New Stream</a>
+									<a href="{{ url_for('lecturer_bp.edit_quiz', quiz_id=quiz.id) }}" class="btn btn-secondary"><i class="fas fa-edit"></i> Edit</a> -->
+				</div>
+				<ul class="list-group list-group-flush">
+					{% if quiz['streams'] == 0 %}
+					<li class="list-group-item"><strong class="text-danger"><i class="fas fa-play"></i>
+							Not streaming
+							{% else %}
+					<li class="list-group-item"><strong class="text-success"><i class="fas fa-play"></i>
+							{{ quiz['streams'] }} stream(s)
+							{% endif %}
+						</strong></li>
+					{% if quiz['streams'] != 0 %}
+					<li class="list-group-item">
+						<strong class="text-danger">
+							<i class="fas fa-pencil-alt"></i>
+							{{ quiz['players_completed'] }} / {{ quiz['max_participants'] }} ({{ quiz['players_percent'] }}%) expected responses
+						</strong>
+					</li>
+					<li class="list-group-item"><strong class="text-info"><i class="fas fa-calendar"></i>
+							{% if quiz['end_string'] == "" %}
+							Streams ended
+							{% else %}
+							Ends in {{ quiz['end_string'] }}
+							{% endif %}
+						</strong></li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	{% endfor %}
+	{% endif %}
+	<!-- <div class="col-md-3 col-sm-6">
+				<div class="card">
+					<div class="card-body text-center">
+						<h4 class="card-title">CM3199 Feedback</h4>
+						<p class="card-text">Anonymous module feedback</p>
+						<a href="?f=create-stream.php" class="btn btn-primary"><i class="fas fa-plus"></i> New Stream</a>
+						<a href="?f=edit-stream.php" class="btn btn-secondary"><i class="fas fa-edit"></i> Edit</a>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item"><strong class="text-info"><i class="fas fa-play"></i> Quiz stream ended 2 days ago. <a href="#">Run again?</a></strong></li>
+						<li class="list-group-item"><strong class="text-secondary"><i class="fas fa-pencil-alt"></i> 27 / 74 (36%) expected responses</strong></li>
+						<li class="list-group-item"><strong class="text-success"><i class="fas fa-paper-plane"></i> Results available!</strong></li>
+					</ul>
+				</div>
+			</div> -->
+</div>
+</div>
+{% endblock content %}

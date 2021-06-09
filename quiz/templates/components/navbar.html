@@ -1,0 +1,77 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}" />
+<nav class="navbar navbar-expand-lg navbar-dark">
+	<a class="navbar-brand " href="/">Lancometer 3</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#lancometer_navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="lancometer_navbar">
+		<ul class="navbar-nav mr-auto">
+			{% if current_user.is_authenticated %}
+				{% if current_user.account_type == 0 %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url_for('student_bp.dashboard') }}">
+						<i class="fas fa-user-graduate"></i> Dashboard
+					</a>
+				</li>
+            	{% elif current_user.account_type == 1 %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url_for('lecturer_bp.dashboard') }}">
+						<i class="fas fa-user-graduate"></i> Dashboard
+					</a>
+				</li>
+            	{% endif %}
+
+            	{% if current_user.account_type >= 2 %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url_for('lecturer_bp.dashboard') }}">
+						<i class="fas fa-chalkboard-teacher"></i> Lecturer
+					</a>
+				</li>
+				{% endif %}
+
+				{% if current_user.account_type >= 4 %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url_for('admin_bp.dashboard') }}">
+						<i class="fas fa-users-cog"></i> Admin
+					</a>
+				</li>
+				{% endif %}
+
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url_for('user_bp.account') }}">
+						<i class="fas fa-user-alt"></i> Account
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url_for('user_bp.logout') }}">
+						<i class="fas fa-sign-out-alt"></i> Logout
+					</a>
+				</li>
+			{% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url_for('user_bp.login') }}">
+						<i class="fas fa-users"></i> Login
+					</a>
+				</li>
+			{% endif %}
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="information_dropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+					<i class="fas fa-info-circle"></i> Information
+				</a>
+				<ul class="dropdown-menu" aria-labelledby="information_dropdown">
+					<li>
+						<a class="dropdown-item" href="{{ url_for('info_bp.privacy') }}">
+							<i class="fas fa-user-secret"></i> Privacy Policy
+						</a>
+					</li>
+					<li>
+						<a class="dropdown-item" href="{{ url_for('info_bp.terms') }}">
+							<i class="fas fa-file-contract"></i> Terms of Use
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</nav>

@@ -1,0 +1,19 @@
+body {
+    background: #141516;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased
+}
+
+.container-fluid {
+   background-color: #141516;
+   color:white;
+}
+
+.hr-light {
+	border-color:#fff;
+	border-width:0.1rem;
+}
+
+.map_chooser {
+	min-height:50vh;
+}

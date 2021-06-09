@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block description %}{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5 px-3">
+	<div class="container">
+		<h1 class="display-5">You must reauthenticate to access this page</h1>
+		{% include "components/alert.html" %}
+		{% for field, errors in reauth_form.errors.items() %}
+			<div class="alert alert-info alert-danger alert-dismissible fade show" role="alert">
+				{{ reauth_form[field].label }}: {{ ', '.join(errors) }}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endfor %}
+		<form id="reauth_form" action="{{ url_for('user_bp.reauth') }}" name="reauth_form" method="POST">
+			{{ reauth_form.csrf_token }}
+			<div class="mb-3">
+				{{ reauth_form.password.label(class="form-label") }}
+				{{ reauth_form.password(class="form-control") }}
+			</div>
+			{{ reauth_form.submit(class='btn btn-success') }}
+		</form>
+	</div>
+</div>
+{% endblock content %}

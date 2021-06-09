@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Play Game{% endblock title %}
+{% block ogdescription %}You are currently playing a game on Lancometer 3{% endblock %}
+{% block description %}You are currently playing a game onn Lancometer 3{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-5">
+	<div class="container">
+		<h1 class="display-3" id="quiz_name">Game</h1>
+		<h2 class="h3 text-light" id="quiz_desc">Please wait...</h2>
+		{% include "components/alert.html" %}
+		<a href="{{ url_for('play_bp.game_settings') }}" class="btn btn-dark"><i class="fas fa-sliders-h"></i> Settings</a>
+		<a href="{{ url_for('play_bp.game_leaderboard') }}" class="btn btn-dark"><i class="fas fa-chess-board"></i> Leaderboard</a>
+		<a href="{{ url_for('info_bp.student_support') }}" class="btn btn-primary"><i class="fas fa-hands-helping"></i> Help</a>
+		<a href="{{ url_for('play_bp.leave_game') }}" class="btn btn-danger"><i class="fas fa-window-close"></i> Leave Game</a>
+
+		<span id="saving_text" class="inline ml-5" style="display: none;">
+			<strong id="loading_status">Saving...</strong>
+			<div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+		</span>
+
+		<hr />
+		<div id="main_game" data-code="{{ session.game_code }}">
+			<h2>Hold on tight, we're getting ready</h2>
+			<div class="text-light d-flex align-items-center">
+			  	<strong id="loading_status">Loading text...</strong>
+			  	<div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
+
+{% block pageend %}
+<script src="{{ url_for('static', filename='js/play/api.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/play/ui.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='js/play/game.js') }}" type="text/javascript" defer></script>
+{% endblock %}

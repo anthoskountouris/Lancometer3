@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Enter Code{% endblock title %}
+{% block ogdescription %}Enter a game code to join a game on Lancometer 3{% endblock %}
+{% block description %}Enter a game code to join a game on Lancometer 3{% endblock %}
+
+{% block pagehead %}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css') }}" />
+{% endblock pagehead %}
+
+{% block content %}
+<div class="container-fluid p-5">
+	<div class="container">
+		<h1 class="display-3">Join Lancometer</h1>
+		{% include "components/alert.html" %}
+
+		<form id="code_enter" action="{{ url_for('play_bp.enter_code') }}" method="POST">
+			{{ join_form.csrf_token }}
+			{% if not current_user.is_authenticated %}
+				<p class="lead">You are not logged in, to join a game please enter your email address.</p>
+				<div class="input-group input-group-lg mb-3">
+  					<input type="text" class="form-control form-control-lg" placeholder="Your student email" aria-label="Your student email" aria-describedby="basic-addon2">
+  					<div class="input-group-append">
+    					<span class="input-group-text" id="basic-addon2">@cardiff.ac.uk</span>
+  					</div>
+				</div>
+			{% else %}
+				<p class="lead">Welcome back, {{ current_user.name }}</p>
+			{% endif %}
+			<hr />
+			<div class="form-group input-group input-group-lg">
+				<div class="input-group-prepend">
+					{{ join_form.game_code.label(class="input-group-text") }}
+				</div>
+				{{ join_form.game_code(class='form-control') }}
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-lg btn-block font-weight-bolder">
+					<i class="fas fa-play"></i> Join
+				</button>
+			</div>
+		</form>
+		<hr />
+	</div>
+</div>
+{% endblock content %}

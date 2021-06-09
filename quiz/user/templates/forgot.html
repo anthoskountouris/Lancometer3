@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Forgot Password{% endblock %}
+
+{% block pagehead %}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loginregister.css') }}"/>
+{% endblock pagehead %}
+
+{% block content %}
+	<div class="container px-4 py-3 mx-auto">
+		<div class="card card0">
+			<div class="d-flex flex-lg-row flex-column-reverse">
+				<div class="card card1">
+					<div class="row justify-content-center my-auto">
+						<div class="col-md-8 col-10 my-5">
+							<h2 class="h3 my-0 msg-info text-center">Forgot Password</h2>
+							{% include "components/alert.html" %}
+
+						</div>
+					</div>
+				</div>
+				<div class="card card2">
+					<div class="my-auto mx-md-5 px-md-5 right">
+						<h3 class="text-light">Lancometer 3.0</h3>
+						<span class="text-light">Game-based approach to quizzes where students are assigned to teams
+							and compete to score points in minigames.
+						</span>
+						<hr />
+						<span class="text-light">
+
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

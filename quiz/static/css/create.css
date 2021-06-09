@@ -1,0 +1,28 @@
+body {
+    background: #141516;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased
+}
+
+.jumbotron {
+    background-color: #141516;
+}
+
+.display-2{
+    color: white;
+}
+.display-5{
+    color: white;
+}
+
+.form-label {
+    color: white;
+}
+
+h2{
+    color:white;
+}
+
+.h3{
+    color:white;
+}

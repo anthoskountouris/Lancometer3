@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Quiz{% endblock title %}
+
+{% block pagehead %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/manage.css') }}" />
+{% endblock pagehead %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-3 text-light mb-4">Manage Quizzes</h1>
+		{% include "components/alert.html" %}
+		<div class="btn-group" role="group" aria-label="Quiz management quick options">
+			<a href="{{ url_for('lecturer_bp.create_quiz') }}" class="btn btn-primary">
+				<i class="fas fa-star"></i> Create a Quiz
+			</a>
+			<a href="{{ url_for('lecturer_bp.manage_stream') }}" class="btn btn-secondary">
+				<i class="fas fa-cogs"></i> Manage Streams
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="container-xl">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/">Home</a></li>
+			<li class="breadcrumb-item"><a href="{{ url_for('lecturer_bp.dashboard') }}">Your Dashboard</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Manage Quizzes</li>
+		</ol>
+	</nav>
+
+	<table class="table table-striped table-dark table-hover">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Name</th>
+				<th scope="col">Time Created</th>
+				<th scope="col">Status</th>
+				<th scope="col">Options</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if quiz_list|length == 0 %}
+			<tr>
+				<th scope="row" colspan="5">No quizzes found associated with your account</th>
+			</tr>
+			{% else %}
+			{% for quiz in quiz_list %}
+			<tr>
+				<td>{{ quiz['id'] }}</td>
+				<td>{{ quiz['name'] }}</td>
+				<td>{{ quiz['time_created'] }}</td>
+				<td>
+					{% if quiz['streams'] == 0 %}
+					Not streaming
+					{% else %}
+					{{ quiz['streams'] }} stream(s)
+					{% endif %}
+				</td>
+				<td>
+					<a href="{{ url_for('lecturer_bp.edit_quiz', quiz_id=quiz.id) }}" class="btn btn-secondary">Edit</a>
+					<a href="{{ url_for('lecturer_bp.delete_quiz', quiz_id=quiz.id) }}"
+						class="btn btn-danger">Delete</a>
+				</td>
+			</tr>
+			{% endfor %}
+			{% endif %}
+
+		</tbody>
+	</table>
+
+</div>
+
+{% endblock content %}

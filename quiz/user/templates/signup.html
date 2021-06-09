@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block pagehead %}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loginregister.css') }}"/>
+{% endblock pagehead %}
+
+{% block content %}
+	<div class="container px-4 py-3 mx-auto">
+		<div class="card card0">
+			<div class="d-flex flex-lg-row flex-column-reverse">
+				<div class="card card1">
+					<div class="row justify-content-center my-auto">
+						<div class="col-md-8 col-10 my-5">
+							<h2 class="h3 my-0 msg-info text-center">Sign-up</h2>
+							{% include "components/alert.html" %}
+							<form id="signup_form" action="{{ url_for('user_bp.signup') }}" method="POST">
+								{% for item in form %}
+								<div class="form-group">
+									{{ item.label(class="form-control-label text-dark h3") if 'hidden' not in item.flags }}
+									{% for error in item.errors %}
+										<br /><small class="text-muted text-error">[{{ error }}]</small>
+									{% endfor %}
+									{{ item(class="form-control") }}
+								</div>
+								{% endfor %}
+								<div class="row justify-content-center my-0 px-3">
+									<button type="submit" class="btn btn-lg btn-block btn-color mt-2"> <i class="fas fa-sign-in-alt"></i> Sign up</button>
+								</div>
+								<div class="row justify-content-center my-2">
+									<a href="{{ url_for('user_bp.login') }}" class="text-muted">Already have an account? Click here</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="shadow card card2">
+					<div class="my-auto mx-md-5 px-md-5 right">
+						<p class="h3 text-light">Lancometer 3.0</p>
+						<span>
+							Game-based approach to quizzes where students are assigned to teams
+							and compete to score points in mini-games.
+						</span>
+						<hr />
+						<span class="text-light">
+							<a href="{{ url_for('play_bp.enter_code') }}" class="sm-text mb-3">
+								<h6>Want to play without an account?</h6>
+							</a>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
