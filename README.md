@@ -47,22 +47,6 @@ To run the flask application do:
 	
 	python wsgi.py
 
-## Database Credentials
-
-*We know it's a bad idea to do this in practise*
-
-MySQL Access:
-- Username: c1945047
-- Password: Lancometer3!
-- Database Name: c1945047_lancometer3
-
-Login to MySQL using: "mysql -u c1945047 -h csmysql.cs.cf.ac.uk -p" and enter the password when prompted
-
-Access the database with "use c1945047_lancometer3;"
-If you need to access the content inside of the database:
-- "show tables;"
-- "select * from (name of table);"
-
 ## Blueprints
 
 Each blueprint is stored within its own subfolder (e.g /user/account) 
